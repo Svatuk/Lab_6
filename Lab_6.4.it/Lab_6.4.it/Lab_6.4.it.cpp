@@ -64,7 +64,7 @@ int Squeeze(double* a, const int size, const double A, const double B) // сти
 	return j;
 }
 
-void FillZeros(double* a, const int size, const int squeeze)
+void FillZeros(double* a, const int size, const int squeeze) 
 {
 	for (int i = squeeze; i < size; i++)
 	{
