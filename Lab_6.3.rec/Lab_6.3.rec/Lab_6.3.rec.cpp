@@ -10,6 +10,15 @@ void Create(int* a, const int size, const int Low, const int High, int i) // ф�
 	if (i < size - 1)
 		Create(a, size, Low, High, i + 1);
 }
+
+template <typename T>
+void Create(T* a, const int size, const int Low, const int High, int i) // формування масиву
+{
+	a[i] = Low + rand() % (High - Low + 1);
+	if (i < size - 1)
+		Create<T>(a, size, Low, High, i + 1);
+}
+
 void Print(int* a, const int size, int i) // вивід масиву
 {
 	cout << setw(6) << a[i];
@@ -29,31 +38,62 @@ void Print(T* a, const int size, int i)
 		cout << endl;
 }
 
+void Find(int* a, int tmp, int& j) // пошук позиції вставки
+{
+	if (tmp < a[j])
+	{
+		j++;
+		Find(a, tmp, j);
+	}
+}
+
+template <typename T>
+void Find(T* a, T tmp, int& j) 
+{
+	if (tmp < a[j])
+	{
+		j++;
+		Find<T>(a, tmp, j);
+	}
+}
+
+void Shift(int* a, int j, int k) // зсув
+{
+	a[k + 1] = a[k];
+	if (k > j)
+		Shift(a, j, k - 1);
+}
+
+template <typename T>
+void Shift(T* a, int j, int k) 
+{
+	a[k + 1] = a[k];
+	if (k > j)
+		Shift<T>(a, j, k - 1);
+}
+
 
 void Sort(int* a, const int size, int i) // метод вставки
-{ // i - індекс початку невпорядкованої частини
+{
 	int tmp = a[i]; // вибрали елемент для вставки
 	int j = 0; // пошук позиції вставки
-	while (tmp < a[j])
-		j++;
-	for (int k = i - 1; k >= j; k--) // зсув
-		a[k + 1] = a[k];
+	Find(a, tmp, j);
+	Shift(a, j, i - 1); // зсув
 	a[j] = tmp; // вставка
 	if (i < size - 1)
 		Sort(a, size, i + 1); // рекурсивний виклик
 }
+
 template <typename T>
 void Sort(T* a, const int size, int i) 
 { 
 	T tmp = a[i]; 
-	int j = 0;
-	while (tmp < a[j])
-		j++;
-	for (int k = i - 1; k >= j; k--) 
-		a[k + 1] = a[k];
+	int j = 0; 
+	Find<T>(a, tmp, j);
+	Shift<T>(a, j, i - 1); 
 	a[j] = tmp; 
 	if (i < size - 1)
-		Sort<T>(a, size, i + 1);
+		Sort<T>(a, size, i + 1); 
 }
 
 int main()
@@ -72,7 +112,7 @@ int main()
 	cout << endl;
 
 	int c[n];
-	Create(c, n, Low, High, 0);
+	Create<int>(c, n, Low, High, 0);
 	Print<int>(c, n, 0);
 	Sort<int>(c, n, 1);
 	Print<int>(c, n, 0);

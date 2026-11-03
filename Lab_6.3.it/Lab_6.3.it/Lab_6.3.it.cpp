@@ -10,6 +10,13 @@ void Create(int* a, const int size, const int Low, const int High) // створ
 		a[i] = Low + rand() % (High - Low + 1);
 }
 
+template <typename T>
+void Create(T* a, const int size, const int Low, const int High) // створення масиву
+{
+	for (int i = 0; i < size; i++)
+		a[i] = Low + rand() % (High - Low + 1);
+}
+
 void Print(int* a, const int size) // вивід масиву
 {
 	for (int i = 0; i < size; i++)
@@ -71,7 +78,7 @@ int main()
 	cout << endl;
 
 	int c[n];
-	Create(c, n, Low, High);
+	Create<int>(c, n, Low, High);
 	Print<int>(c, n);
 	Sort<int>(c, n);
 	Print<int>(c, n);

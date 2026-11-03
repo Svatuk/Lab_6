@@ -12,7 +12,7 @@ namespace UnitTest1
 		
 		TEST_METHOD(TestMethod1)
 		{
-			double a[5] = { -6.4, 4.6, 8.2, -2.1, 9.3 };
+			double a[5] = { -6.4, 4.6, 8.2, -2.1, 9.3 }; // пошук максимального значення
 			double t = Max(a, 5);
 			Assert::AreEqual(9.3, t, 0.001);
 		}

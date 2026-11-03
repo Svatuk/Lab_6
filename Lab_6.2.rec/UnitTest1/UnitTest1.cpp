@@ -15,6 +15,6 @@ namespace UnitTest1
 			int a[5] = { -5, 2, -3, 6, 7 };      // непарні: -5, -3, 7
 			double t = Sum(a, 5, 0);
 			Assert::AreEqual(-1.0, t, 0.0001);
-		}
+		} 
 	};
 }
